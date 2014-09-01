@@ -1,8 +1,7 @@
 require 'sinatra'
 require 'redis'
 
-class Relation
-end
+class Relation < Sinatra::Base
 
   get "/relation" do
     "welcome to the Relation Homepage"
@@ -24,4 +23,6 @@ end
       test + " showing now for #{params[:key]} on a show page"
     end
   end
+
+end
 
