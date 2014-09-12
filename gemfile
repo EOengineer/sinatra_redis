@@ -7,4 +7,5 @@ gem 'pry'
 gem 'test-unit'
 gem 'rack-test'
 gem 'rspec'
+gem 'json'
 

@@ -1,28 +1,29 @@
 require 'sinatra'
 require 'redis'
+require 'pry'
+require 'json'
 
 class Relation < Sinatra::Base
 
-  get "/relation" do
-    "welcome to the Relation Homepage"
-  end
-
-  get "/relation/new/:id" do
-    relation = Redis.new(host: '127.0.0.1', port: 6379)
-    show = "#{params[:id]}"
-    relation.set(show ,'testvals')
-    redirect "/relation/#{params[:id]}"
-  end
-
-  get "/relation/:key" do
-    relation = Redis.new(host: '127.0.0.1', port: 6379)
-    test = relation.get("#{params[:key]}")
-    if test == nil
-      "bad key dude"
-    else
-      test + " showing now for #{params[:key]} on a show page"
-    end
-  end
-
 end
 
+
+
+get '/home' do
+  "Hello World"
+end
+
+get '/relations' do
+  @relation = Redis.new(host: '127.0.0.1', port: 6379)
+  show = @relation.keys.sort
+  "all the keys #{show}"
+end
+
+get '/relation' do
+  content_type :json
+  @relation = Redis.new(host: '127.0.0.1', port: 6379)
+  object = @relation.get(params[:object])
+  relation_name = @relation.get(params[:r_name])
+  show = {object: "#{object}", relation_name: "#{relation_name}"}
+  show.to_json
+end

@@ -1,27 +1,31 @@
 
 require 'rack/test'
 require_relative '../lib/relation'
+require 'pry'
 
 def app
   Relation.new
 end
 
+
+
 describe Relation do
   include Rack::Test::Methods
-  #Database Setup
-  it 'connects to a Redis database' do
-    relation = Redis.new(host: '127.0.0.1', port: 6379)
-    relation.flushdb
-    count = relation.dbsize
-    relation.set("mykey", 'myval')
-    expect(relation.get("mykey")).to eq('myval')
-    #relation.flushdb
+
+  before(:each) do
+    @relation = Redis.new(host: '127.0.0.1', port: 6379)
   end
 
-  it 'visits home page' do
-    get '/relation' do
-      expect(last_response).to be_ok
-      expect(last_response.body).to eq("welcome to the Relation Homepage")
+
+  #Database Setup
+  it 'posts a relation' do
+    count = @relation.dbsize
+    post 'relation/testkey/testvalue' do
+      expect(@relation.get("testkey")).to eq('testvalue')
+      expect(@relation.dbsize).to eq(count + 1)
+      @relation.flushdb
     end
   end
+
+
 end
