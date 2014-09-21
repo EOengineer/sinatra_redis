@@ -5,7 +5,7 @@
     <databaseInfo>
         <version>134481920</version>
         <UUID>247D40B5-049F-4885-8945-94D11001061E</UUID>
-        <nextObjectID>110</nextObjectID>
+        <nextObjectID>116</nextObjectID>
         <metadata>
             <plist version="1.0">
                 <dict>
@@ -94,12 +94,12 @@
         <attribute name="redirectauthorization" type="bool">0</attribute>
         <attribute name="method" type="string">POST</attribute>
         <attribute name="followredirects" type="bool">0</attribute>
-        <attribute name="body" type="string">["{\\"object\\": {\\n  \\"id\\": \\"1\\",\\n  \\"relation-name\\": \\"taxon-products\\",\\n    \\"objects\\": [\\n      {\\"value\\": \\"New\\", \\"onclick\\": \\"CreateNewDoc()\\"},\\n      {\\"value\\": \\"Open\\", \\"onclick\\": \\"OpenDoc()\\"},\\n      {\\"value\\": \\"Close\\", \\"onclick\\": \\"CloseDoc()\\"}\\n    ]\\n}}"]</attribute>
-        <attribute name="order" type="int64">0</attribute>
-        <attribute name="name" type="string">post whole object</attribute>
+        <attribute name="body" type="string">["[{\\n\\"object_a_type\\":\\"TAXON\\",\\n\\"object_a_id\\":\\"123\\",\\n\\"relation_name\\":\\"TAXON_PRODUCTS\\",\\n\\"object_b_type\\":\\"PRODUCTS\\",\\n\\"object_b_id\\":\\"456\\"\\n},\\n{\\n\\"object_a_type\\":\\"TAXON\\",\\n\\"object_a_id\\":\\"123\\",\\n\\"relation_name\\":\\"TAXON_PRODUCTS\\",\\n\\"object_b_type\\":\\"PRODUCTS\\",\\n\\"object_b_id\\":\\"567\\"\\n}]"]</attribute>
+        <attribute name="order" type="int64">1</attribute>
+        <attribute name="name" type="string">post multiple related object</attribute>
         <relationship name="parent" type="0/1" destination="LMREQUESTTREEITEM"></relationship>
         <relationship name="children" type="0/0" destination="LMREQUESTTREEITEM"></relationship>
-        <relationship name="headers" type="0/0" destination="LMKEYVALUE" idrefs="z107 z109"></relationship>
+        <relationship name="headers" type="0/0" destination="LMKEYVALUE" idrefs="z109 z107"></relationship>
     </object>
     <object type="LMKEYVALUE" id="z107">
         <attribute name="value" type="string">application/json</attribute>
@@ -113,13 +113,13 @@
     </object>
     <object type="LMREQUEST" id="z108">
         <attribute name="uuid" type="string">490CB75C-DAEE-4D3C-89E5-AB94D725C1AC</attribute>
-        <attribute name="url" type="string">http://localhost:9393/relations</attribute>
+        <attribute name="url" type="string">http://localhost:9393/relation?object_a_type=TAXON\u2600object_a_id=123\u2600relation_name=TAXON_PRODUCTS\u2600object_b_type=PRODUCTS\u2600object_b_id=456</attribute>
         <attribute name="timeoutinterval" type="float">30</attribute>
         <attribute name="redirectmethod" type="bool">0</attribute>
         <attribute name="redirectauthorization" type="bool">0</attribute>
         <attribute name="method" type="string">GET</attribute>
         <attribute name="followredirects" type="bool">0</attribute>
-        <attribute name="order" type="int64">2</attribute>
+        <attribute name="order" type="int64">4</attribute>
         <attribute name="name" type="string">index</attribute>
         <relationship name="parent" type="0/1" destination="LMREQUESTTREEITEM"></relationship>
         <relationship name="children" type="0/0" destination="LMREQUESTTREEITEM"></relationship>
@@ -137,16 +137,86 @@
     </object>
     <object type="LMREQUEST" id="z110">
         <attribute name="uuid" type="string">CB525915-A5B1-47D4-9DCD-08EDC0A7F83A</attribute>
-        <attribute name="url" type="string">http://localhost:9393/relation?object=test4</attribute>
+        <attribute name="url" type="string">http://localhost:9393/relations?object_a_type=TAXON\u2600object_a_id=123\u2600relation_name=TAXON_PRODUCTS</attribute>
         <attribute name="timeoutinterval" type="float">30</attribute>
         <attribute name="redirectmethod" type="bool">0</attribute>
         <attribute name="redirectauthorization" type="bool">0</attribute>
         <attribute name="method" type="string">GET</attribute>
         <attribute name="followredirects" type="bool">0</attribute>
-        <attribute name="order" type="int64">1</attribute>
-        <attribute name="name" type="string">get whole object</attribute>
+        <attribute name="order" type="int64">3</attribute>
+        <attribute name="name" type="string">get all objects for relation</attribute>
         <relationship name="parent" type="0/1" destination="LMREQUESTTREEITEM"></relationship>
         <relationship name="children" type="0/0" destination="LMREQUESTTREEITEM"></relationship>
         <relationship name="headers" type="0/0" destination="LMKEYVALUE" idrefs="z103"></relationship>
+    </object>
+    <object type="LMKEYVALUE" id="z111">
+        <attribute name="value" type="string">application/json</attribute>
+        <attribute name="order" type="int64">0</attribute>
+        <attribute name="name" type="string">Content-Type</attribute>
+        <attribute name="enabled" type="bool">1</attribute>
+        <relationship name="groupforbodyparameters" type="0/1" destination="LMREQUESTGROUP"></relationship>
+        <relationship name="groupforheaders" type="0/1" destination="LMREQUESTGROUP"></relationship>
+        <relationship name="groupforurlparameters" type="0/1" destination="LMREQUESTGROUP"></relationship>
+        <relationship name="request" type="0/1" destination="LMREQUEST" idrefs="z113"></relationship>
+    </object>
+    <object type="LMKEYVALUE" id="z112">
+        <attribute name="value" type="string"></attribute>
+        <attribute name="order" type="int64">1</attribute>
+        <attribute name="name" type="string"></attribute>
+        <attribute name="enabled" type="bool">1</attribute>
+        <relationship name="groupforbodyparameters" type="0/1" destination="LMREQUESTGROUP"></relationship>
+        <relationship name="groupforheaders" type="0/1" destination="LMREQUESTGROUP"></relationship>
+        <relationship name="groupforurlparameters" type="0/1" destination="LMREQUESTGROUP"></relationship>
+        <relationship name="request" type="0/1" destination="LMREQUEST" idrefs="z113"></relationship>
+    </object>
+    <object type="LMREQUEST" id="z113">
+        <attribute name="uuid" type="string">287BC4EC-8985-4D11-91C8-D75136B8E3C6</attribute>
+        <attribute name="url" type="string">http://localhost:9393/relation/new</attribute>
+        <attribute name="timeoutinterval" type="float">30</attribute>
+        <attribute name="redirectmethod" type="bool">0</attribute>
+        <attribute name="redirectauthorization" type="bool">0</attribute>
+        <attribute name="method" type="string">POST</attribute>
+        <attribute name="followredirects" type="bool">0</attribute>
+        <attribute name="body" type="string">["[{\\n\\"object_a_type\\":\\"TAXON\\",\\n\\"object_a_id\\":\\"123\\",\\n\\"relation_name\\":\\"TAXON_PRODUCTS\\",\\n\\"object_b_type\\":\\"PRODUCTS\\",\\n\\"object_b_id\\":\\"456\\"\\n},\\n{\\n\\"object_a_type\\":\\"TAXON\\",\\n\\"object_a_id\\":\\"234\\",\\n\\"relation_name\\":\\"TAXON_PRODUCTS\\",\\n\\"object_b_type\\":\\"PRODUCTS\\",\\n\\"object_b_id\\":\\"567\\"\\n}]"]</attribute>
+        <attribute name="order" type="int64">2</attribute>
+        <attribute name="name" type="string">post multiple unrelated object</attribute>
+        <relationship name="parent" type="0/1" destination="LMREQUESTTREEITEM"></relationship>
+        <relationship name="children" type="0/0" destination="LMREQUESTTREEITEM"></relationship>
+        <relationship name="headers" type="0/0" destination="LMKEYVALUE" idrefs="z111 z112"></relationship>
+    </object>
+    <object type="LMKEYVALUE" id="z114">
+        <attribute name="value" type="string"></attribute>
+        <attribute name="order" type="int64">1</attribute>
+        <attribute name="name" type="string"></attribute>
+        <attribute name="enabled" type="bool">1</attribute>
+        <relationship name="groupforbodyparameters" type="0/1" destination="LMREQUESTGROUP"></relationship>
+        <relationship name="groupforheaders" type="0/1" destination="LMREQUESTGROUP"></relationship>
+        <relationship name="groupforurlparameters" type="0/1" destination="LMREQUESTGROUP"></relationship>
+        <relationship name="request" type="0/1" destination="LMREQUEST" idrefs="z115"></relationship>
+    </object>
+    <object type="LMREQUEST" id="z115">
+        <attribute name="uuid" type="string">D47E8E71-2BEC-46C7-A372-5564F8005552</attribute>
+        <attribute name="url" type="string">http://localhost:9393/relation/new</attribute>
+        <attribute name="timeoutinterval" type="float">30</attribute>
+        <attribute name="redirectmethod" type="bool">0</attribute>
+        <attribute name="redirectauthorization" type="bool">0</attribute>
+        <attribute name="method" type="string">POST</attribute>
+        <attribute name="followredirects" type="bool">0</attribute>
+        <attribute name="body" type="string">["{\\n\\"object_a_type\\":\\"TAXON\\",\\n\\"object_a_id\\":\\"123\\",\\n\\"relation_name\\":\\"TAXON_PRODUCTS\\",\\n\\"object_b_type\\":\\"PRODUCTS\\",\\n\\"object_b_id\\":\\"456\\"\\n}\\n"]</attribute>
+        <attribute name="order" type="int64">0</attribute>
+        <attribute name="name" type="string">post single related object</attribute>
+        <relationship name="parent" type="0/1" destination="LMREQUESTTREEITEM"></relationship>
+        <relationship name="children" type="0/0" destination="LMREQUESTTREEITEM"></relationship>
+        <relationship name="headers" type="0/0" destination="LMKEYVALUE" idrefs="z116 z114"></relationship>
+    </object>
+    <object type="LMKEYVALUE" id="z116">
+        <attribute name="value" type="string">application/json</attribute>
+        <attribute name="order" type="int64">0</attribute>
+        <attribute name="name" type="string">Content-Type</attribute>
+        <attribute name="enabled" type="bool">1</attribute>
+        <relationship name="groupforbodyparameters" type="0/1" destination="LMREQUESTGROUP"></relationship>
+        <relationship name="groupforheaders" type="0/1" destination="LMREQUESTGROUP"></relationship>
+        <relationship name="groupforurlparameters" type="0/1" destination="LMREQUESTGROUP"></relationship>
+        <relationship name="request" type="0/1" destination="LMREQUEST" idrefs="z115"></relationship>
     </object>
 </database>
