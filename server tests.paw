@@ -113,7 +113,7 @@
     </object>
     <object type="LMREQUEST" id="z108">
         <attribute name="uuid" type="string">490CB75C-DAEE-4D3C-89E5-AB94D725C1AC</attribute>
-        <attribute name="url" type="string">http://localhost:9393/relation?object_a_type=TAXON\u2600object_a_id=123\u2600relation_name=TAXON_PRODUCTS\u2600object_b_type=PRODUCTS\u2600object_b_id=456</attribute>
+        <attribute name="url" type="string">http://localhost:9393/relation/exists?object_a_type=TAXON\u2600object_a_id=123\u2600relation_name=TAXON_PRODUCTS\u2600object_b_type=PRODUCTS\u2600object_b_id=456</attribute>
         <attribute name="timeoutinterval" type="float">30</attribute>
         <attribute name="redirectmethod" type="bool">0</attribute>
         <attribute name="redirectauthorization" type="bool">0</attribute>
@@ -123,7 +123,7 @@
         <attribute name="name" type="string">index</attribute>
         <relationship name="parent" type="0/1" destination="LMREQUESTTREEITEM"></relationship>
         <relationship name="children" type="0/0" destination="LMREQUESTTREEITEM"></relationship>
-        <relationship name="headers" type="0/0" destination="LMKEYVALUE" idrefs="z104 z102"></relationship>
+        <relationship name="headers" type="0/0" destination="LMKEYVALUE" idrefs="z102 z104"></relationship>
     </object>
     <object type="LMKEYVALUE" id="z109">
         <attribute name="value" type="string"></attribute>
